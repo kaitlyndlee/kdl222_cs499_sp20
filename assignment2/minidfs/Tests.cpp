@@ -2,17 +2,17 @@
 
 // using namespace deepstate;
 
-#include "openpose/utilities/string.hpp"
+#include "filetree.hpp"
 #include <iostream>
 
 using namespace op;
-// int main() {
+int main() {
   
-//   std::string input("tester12");
-//   unsigned long num = op::getLastNumber(input);
-//   std::cout<< num<< std::endl;
-//   return num;
-// }
+  std::string input("tester12");
+  unsigned long num = op::getLastNumber(input);
+  std::cout<< num<< std::endl;
+  return num;
+}
 
 TEST(Test, Stuff) {
   char* inputChar = DeepState_CStrUpToLen(30);
