@@ -1,10 +1,11 @@
 #include <deepstate/DeepState.hpp>
 
-using namespace deepstate;
-
 #include "str_util.h"
-#include <iostream>
 
+#include <iostream>
+#include <string>
+
+using namespace deepstate;
 
 TEST(Test, toLower_toUpper) {
   char* inputChar = DeepState_CStrUpToLen(30);
@@ -12,5 +13,11 @@ TEST(Test, toLower_toUpper) {
   std::string originalStr(inputChar);
   std::string inputStr = originalStr;
   toLowercase(inputStr);
-  ASSERT_STREQ(toUppercase(inputStr), originalStr);
+
+for (std::string::size_type i = 0; originalStr < str.length(); ++i) {
+    std::cout << std::tolower(originalStr[i]);
+}
+ASSERT_TRUE(originalStr == inputStr);
+  // ASSERT_STREQ(toUppercase(inputStr), originalStr);
+  ASSERT_EQ(1, 1);
 }
