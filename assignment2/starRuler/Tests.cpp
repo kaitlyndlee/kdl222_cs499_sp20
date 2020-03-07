@@ -14,7 +14,7 @@ TEST(Test, toLower_toUpper) {
   std::string inputStr = originalStr;
   toLowercase(inputStr);
 
-for (std::string::size_type i = 0; originalStr < str.length(); ++i) {
+for (std::string::size_type i = 0; i < originalStr.length(); ++i) {
     std::cout << std::tolower(originalStr[i]);
 }
 ASSERT_TRUE(originalStr == inputStr);
