@@ -58,24 +58,24 @@ TEST(StrUtil, StrManipulation) {
     ASSERT_TRUE(originalStr == inputStr);
 
     // Replace
-    inputStr = originalStr;
-    int substrStart = DeepState_IntInRange(1, stringSize - 2);
-    int substrEnd = DeepState_IntInRange(substrStart + 1, stringSize - 1);
+    // inputStr = originalStr;
+    // int substrStart = DeepState_IntInRange(1, stringSize - 2);
+    // int substrEnd = DeepState_IntInRange(substrStart + 1, stringSize - 1);
 
-    char* newStringChar = DeepState_CStr_C(substrEnd - substrStart, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
-    std::string newStr(newStringChar);
+    // char* newStringChar = DeepState_CStr_C(substrEnd - substrStart, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
+    // std::string newStr(newStringChar);
 
-    std::string output = replace(inputStr, inputStr.substr(substrStart, substrEnd - substrStart), newStr);
+    // std::string output = replace(inputStr, inputStr.substr(substrStart, substrEnd - substrStart), newStr);
 
-    ASSERT_TRUE(stringReplaced(originalStr, inputStr, newStr, substrStart, substrEnd));
+    // ASSERT_TRUE(stringReplaced(originalStr, inputStr, newStr, substrStart, substrEnd));
 
-    // Split/Join
-    inputStr = originalStr;
-    std::vector<std::string> out = {};
-    char *charToSplitOn = DeepState_CStr_C(1, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
-    split(inputStr, out, charToSplitOn, false, true);
-    output = join(out, charToSplitOn, false);
-    ASSERT_TRUE(output == inputStr);
+    // // Split/Join
+    // inputStr = originalStr;
+    // std::vector<std::string> out = {};
+    // char *charToSplitOn = DeepState_CStr_C(1, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
+    // split(inputStr, out, charToSplitOn, false, true);
+    // std::string  output = join(out, charToSplitOn, false);
+    // ASSERT_TRUE(output == inputStr);
 
     // OneOf
     stringSize = DeepState_SizeInRange(1, 256);
@@ -85,36 +85,32 @@ TEST(StrUtil, StrManipulation) {
     inputStr = originalStrLong;
 
     for (int n = 0; n < stringSize; n++) {
-        LOG(TRACE) << "Number of Iterations: " + inputStr;
+        LOG(TRACE) << "Number of Iterations: " + n;
         OneOf(
           [&] {
             LOG(TRACE) << "Our Lowercase: " + inputStr;
             toLowercase(inputStr);
 
             ASSERT_TRUE(isLower(originalStrLong, inputStr));
+            originalStrLong = inputStr;
           },
           [&] {
             LOG(TRACE) << "Our Uppercase: " + inputStr;
             toUppercase(inputStr);
 
             ASSERT_TRUE(isUpper(originalStrLong, inputStr));
-          },
-          [&] {
-            LOG(TRACE) << "Escaped " + inputStr;
-            inputStr = escape(inputStr);
-          },
-          [&] {
-            LOG(TRACE) << "Unescaped " + inputStr;
-            inputStr = unescape(inputStr);
+            originalStrLong = inputStr;
           },
         [&] {
-            LOG(TRACE) << "Trimmed whitespace" + inputStr;
+            LOG(TRACE) << "Trimmed whitespace";
             inputStr = trim(inputStr);
+            originalStrLong = inputStr;
           },
         [&] {
             LOG(TRACE) << "Trimmed char " + inputStr;
             char *charToTrim = DeepState_CStrUpToLen(1);
             inputStr = trim(inputStr, charToTrim);
+            originalStrLong = inputStr;
           },
         [&] {
             LOG(TRACE) << "Replaced substring " + inputStr;
@@ -125,18 +121,14 @@ TEST(StrUtil, StrManipulation) {
             inputStr = replace(inputStr, inputStr.substr(substrStart, substrEnd - substrStart), newStr);
 
             ASSERT_TRUE(stringReplaced(originalStrLong, inputStr, newStr, substrStart, substrEnd));
+            originalStrLong = inputStr;
           },
         [&] {
             LOG(TRACE) << "Replaced char " + inputStr;
             char newChar = DeepState_Char();
             char charToReplace = DeepState_Char();
             replaceChar(inputStr, charToReplace, newChar);
-          },
-        [&] {
-            LOG(TRACE) << "Made Identifier " + inputStr;
-            makeIdentifier(inputStr);
-
-            ASSERT_TRUE(isIdentifier(inputStr));
+            originalStrLong = inputStr;
           }
         );
     }
