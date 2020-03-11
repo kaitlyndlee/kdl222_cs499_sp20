@@ -96,32 +96,36 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Number of Iterations: " << n;
         OneOf(
           [&] {
-            LOG(TRACE) << "Our Lowercase: " << inputStr;
+            LOG(TRACE) << "Started Lowercase: " << inputStr;
             toLowercase(inputStr);
 
             ASSERT_TRUE(isLower(originalStrLong, inputStr));
             originalStrLong = inputStr;
+            LOG(TRACE) << "Our Lowercase: " << inputStr;
           },
           [&] {
-            LOG(TRACE) << "Our Uppercase: " << inputStr;
+            LOG(TRACE) << "Started Uppercase: " << inputStr;
             toUppercase(inputStr);
 
             ASSERT_TRUE(isUpper(originalStrLong, inputStr));
             originalStrLong = inputStr;
+            LOG(TRACE) << "Our Uppercase: " << inputStr;
           },
         [&] {
-            LOG(TRACE) << "Trimmed whitespace";
+            LOG(TRACE) << "Started Trim: " << inputStr;
             inputStr = trim(inputStr);
             originalStrLong = inputStr;
+            LOG(TRACE) << "Trimmed whitespace";
           },
         [&] {
-            LOG(TRACE) << "Trimmed char " << inputStr;
+            LOG(TRACE) << "Started Char Trim: " << inputStr;
             char *charToTrim = DeepState_CStrUpToLen(1);
             inputStr = trim(inputStr, charToTrim);
             originalStrLong = inputStr;
+            LOG(TRACE) << "Trimmed char: "<< charToTrim << " string: " << inputStr;
           },
         [&] {
-            LOG(TRACE) << "Replaced substring " << inputStr;
+            LOG(TRACE) << "Started Replace: " << inputStr;
             int substrStart = 0;
             int substrEnd = 1;
             if(stringSize > 2) {
@@ -136,13 +140,15 @@ TEST(StrUtil, StrManipulation) {
 
             ASSERT_TRUE(stringReplaced(originalStrLong, inputStr, substr, newStr, substrStart, substrEnd));
             originalStrLong = inputStr;
+            LOG(TRACE) << "Replaced substring: "<< substr << " with " <<  newStr << " string:" << inputStr;
           },
         [&] {
-            LOG(TRACE) << "Replaced char " << inputStr;
+            LOG(TRACE) << "Started Replace Char: " << inputStr;
             char newChar = DeepState_Char();
             char charToReplace = DeepState_Char();
             replaceChar(inputStr, charToReplace, newChar);
             originalStrLong = inputStr;
+            LOG(TRACE) << "Replaced char: " << charToReplace << " with: " << newChar << " string: " << inputStr;
           }
         );
     }
