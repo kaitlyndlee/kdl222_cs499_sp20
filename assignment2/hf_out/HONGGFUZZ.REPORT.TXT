@@ -1,0 +1,32 @@
+=====================================================================
+TIME: 2020-03-10.06:15:58
+=====================================================================
+FUZZER ARGS:
+ mutationsPerRun : 6
+ externalCmd     : NULL
+ fuzzStdin       : FALSE
+ timeout         : 10 (sec)
+ ignoreAddr      : (nil)
+ ASLimit         : 0 (MiB)
+ RSSLimit        : 50 (MiB)
+ DATALimit       : 0 (MiB)
+ wordlistFile    : NULL
+ dynFileMethod   : 
+ fuzzTarget      : /home/user/deepstate/kdl222_cs499_sp20/assignment2/starRuler/string_H --input_test_file ___FILE___ --abort_on_fail --no_fork --min_log_level 2 
+CRASH:
+DESCRIPTION: 
+ORIG_FNAME: [DYNAMIC]
+FUZZ_FNAME: out/the_fuzzer/crashes/SIGABRT.PC.0.STACK.180f88fd76.CODE.-6.ADDR.0.INSTR.mov____0x108(%rsp),%rcx.fuzz
+PID: 3827
+SIGNAL: SIGABRT (6)
+PC: 0x0
+FAULT ADDRESS: 0x0
+INSTRUCTION: mov____0x108(%rsp),%rcx
+STACK HASH: 000000180f88fd76
+STACK:
+ <0x00000000004404c2> [func:DeepState_RunTestNoFork file:DeepState.c line:0 module:/home/user/deepstate/kdl222_cs499_sp20/assignment2/starRuler/string_H]
+ <0x000000000044145b> [func:DeepState_RunSavedTestCase file:DeepState.c line:0 module:/home/user/deepstate/kdl222_cs499_sp20/assignment2/starRuler/string_H]
+ <0x0000000000440a7c> [func:main file: line:0 module:/home/user/deepstate/kdl222_cs499_sp20/assignment2/starRuler/string_H]
+ <0x00007f7ee925db97> [func:UNKNOWN file: line:0 module:/lib/x86_64-linux-gnu/libc-2.27.so]
+ <0x0000000000406cba> [func:_start file: line:0 module:/home/user/deepstate/kdl222_cs499_sp20/assignment2/starRuler/string_H]
+=====================================================================
