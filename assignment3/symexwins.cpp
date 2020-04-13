@@ -37,14 +37,8 @@ float **gauss_jordan(int sizeOfMatrix, float **input, float **inverse) {
                 inverse[i][j] -= inverse[k][j]*localVariable;                        
             }
         }
-
-    printf("\nThe solution is:\n");
-    for(i=1; i<=n; i++)
-    {
-        x[i]=A[i][n+1]/A[i][i];
-        printf("\n x%d=%f\n",i,x[i]);
-    }
   }
+  return inverse;
 }
 
 
@@ -54,7 +48,7 @@ TEST(StrUtil, StrManipulation) {
   float **input;
   float **inverse;
   int i,j,k;
-  int sizeOfMatrix = 4;
+  int sizeOfMatrix = 2;
 
   input = (float **)malloc(sizeOfMatrix*sizeof(float *)); 
   for(i=0;i<sizeOfMatrix;i++) {
@@ -72,8 +66,10 @@ TEST(StrUtil, StrManipulation) {
       input[i][j] = DeepState_UIntInRange(1, 10000);
     }
   }
+  LOG(TRACE)<< printf("Input matrix: [[%f, %f], [%f, %f]]\n", input[0][0], input[0][1], input[1][0], input[1][1]);
   gauss_jordan(sizeOfMatrix, input, inverse);
-
-
-  // ASSERT_TRUE(isLower(originalStr, inputStr));
+  ASSERT_NE(inverse[0][0], 1);
+  ASSERT_NE(inverse[0][1], 2);
+  ASSERT_NE(inverse[1][0], 1);
+  ASSERT_NE(inverse[1][1], 2);
 }
