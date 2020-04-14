@@ -25,8 +25,8 @@ TEST(Fuzzingwins, StrTest) {
   int array[10];
   for(int i = 0; i < 10; i++) {
     array[i] = DeepState_UInt();
+    LOG(TRACE) << "Value [" << i << "]: "<< array[i];
   }
-  // LOG(TRACE) << "String: " << inputString;
   bubbleSort(array, 10);
   ASSERT_NE(array[2], 2);
 }
