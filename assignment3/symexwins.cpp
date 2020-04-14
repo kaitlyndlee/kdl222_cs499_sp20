@@ -1,29 +1,21 @@
 #include <deepstate/DeepState.hpp>
 
 #include <stdio.h>
-#include <math.h>
-
+#include <string.h>
 using namespace deepstate;
 
 
-int isPrime(unsigned int n) {
-  int flag = 1;
-  // Iterate from 2 to n/2 
-  for (int i = 2; i <= sqrt(n); i++) { 
-
-    // If n is divisible by any number between 
-    // 2 and n/2, it is not prime 
-    if (n % i == 0) { 
-      flag = 0; 
-      break; 
-    } 
-  } 
-  return flag;
+int checkValues(int num1, int num2) {
+  if(num1 == 0 || num2 == 0) {
+     return 0;
+  }
+  return (5 * num1 + 3 == num2);
 }
 
 
-TEST(StrUtil, StrManipulation) {
-  int inputNum =DeepState_UIntInRange(0, 10000);
-  LOG(TRACE)<< printf("Input number: %d", inputNum);
-  ASSERT_EQ(isPrime(inputNum), 1);
+TEST(Symexwins, StrTest) {
+  int num1 = DeepState_Int();
+  int num2 = DeepState_Int();
+  LOG(TRACE) << "Numbers: " << num1 << ", " << num2;
+  ASSERT_FALSE(checkValues(num1, num2));
 }
