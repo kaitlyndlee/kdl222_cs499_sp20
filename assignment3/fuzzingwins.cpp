@@ -23,6 +23,6 @@ char strcmp_nocase(const char* a, const char* b) {
 TEST(Fuzzingwins, StrTest) {
   char* inputString = DeepState_CStr_C(128, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
   LOG(TRACE) << "String: " << inputString;
-  ASSERT_FALSE(strcmp_nocase(inputString, "i like pizza"));
+  ASSERT_NE(strcmp_nocase(inputString, "i like pizza"), 0);
 }
 
