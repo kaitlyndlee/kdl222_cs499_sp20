@@ -10,6 +10,16 @@
 #include <functional>
 #include <stack>
 
+int is_binary(const void *buf);
+size_t length_of_buffer(const void *buf);
+void copyString(char *destination, char *source);
+void concatenateString(char *destination, char *source);
+void getSubString(char *destStr, char *sourceStr, 
+                                          int startIndex, int endIndex);
+
+int findSubString(char *testStr, char *searchSubStr);
+
+
 //Get the equivalent character in different case
 char lowercase(char c);
 char uppercase(char c);

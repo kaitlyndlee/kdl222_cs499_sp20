@@ -24,16 +24,6 @@ int isLower(std::string inputStr, std::string compareString) {
     return copyStr == compareString;
 }
 
-int stringReplaced(const std::string inputStr, std::string compareString, std::string replace, std::string with, int start, int end) {
-    std::string copyStr = inputStr;
-    size_t pos = 0;
-    while ((pos = copyStr.find(replace, pos)) != std::string::npos) {
-         copyStr.replace(pos, with.length(), with);
-         pos += with.length();
-    }
-    return copyStr == compareString;
-}
-
 TEST(StrUtil, StrManipulation) {
     size_t stringSize = DeepState_SizeInRange(2, 32);
     char* inputChar = DeepState_CStr_C(stringSize, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
@@ -58,28 +48,26 @@ TEST(StrUtil, StrManipulation) {
 
     ASSERT_TRUE(originalStr == inputStr);
 
-    // Replace
-    inputStr = originalStr;
-    int substrStart = 0;
-    int substrEnd = 1;
-    if(stringSize > 2) {
-        substrStart = DeepState_IntInRange(0, stringSize - 2);
-        substrEnd = DeepState_IntInRange(substrStart + 1, stringSize - 1);
+    // Check if the string is binary, but do not assert
+    int returnVal = is_binary(inputChar);
+    LOG(TRACE) << "Is binary: " << returnVal;
+
+    // See if true/false is a substring and assert that it is a bool
+    char *substring;
+
+    if(findSubString(inputChar, "true") != -1) {
+        int startIndex = findSubString(inputChar, "true");
+        getSubString(substring, inputChar, startIndex, startIndex + 4);
+        std::string subStr(substring);
+        ASSERT_TRUE(toBool(subStr, false));
     }
 
-    LOG(TRACE) << "Starting Replace, start and end:  " << substrStart << " " << substrEnd;
-    char* newStringChar = DeepState_CStr_C(substrEnd - substrStart, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
-    std::string newStr(newStringChar);
-    LOG(TRACE) << "Got replace string:  " << newStr;
-    std::string substr = inputStr.substr(substrStart, substrEnd - substrStart);
-    std::string output = replace(inputStr, substr, newStr);
-    LOG(TRACE) << "Replaced string:  " << inputStr;
-
-    ASSERT_TRUE(stringReplaced(originalStr, inputStr, substr, newStr, substrStart, substrEnd));
-
-    // Check if the string is binary, but do not assert
-    int returnVal = is_binary(inputStr);
-    LOG(TRACE) << "Is binary: " << returnVal;
+    if(findSubString(inputChar, "false") != -1) {
+        int startIndex = findSubString(inputChar, "false");
+        getSubString(substring, inputChar, startIndex, startIndex + 5);
+        std::string subStr(substring);
+        ASSERT_False(toBool(subStr, true));
+    }
 
     // OneOf
     stringSize = DeepState_SizeInRange(2, 32);
@@ -119,24 +107,6 @@ TEST(StrUtil, StrManipulation) {
             inputStr = trim(inputStr, charToTrim);
             originalStrLong = inputStr;
             LOG(TRACE) << "Trimmed char: "<< charToTrim << " string: " << inputStr;
-          },
-        [&] {
-            LOG(TRACE) << "Started Replace: " << inputStr;
-            int substrStart = 0;
-            int substrEnd = 1;
-            if(stringSize > 2) {
-                substrStart = DeepState_IntInRange(0, stringSize - 2);
-                substrEnd = DeepState_IntInRange(substrStart + 1, stringSize - 1);
-            }
-
-            char* newStringChar = DeepState_CStr_C(substrEnd - substrStart, " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_()/?*&%$#@![]{}");
-            std::string newStr(newStringChar);
-            std::string substr = inputStr.substr(substrStart, substrEnd - substrStart);
-            inputStr = replace(inputStr, substr, newStr);
-
-            ASSERT_TRUE(stringReplaced(originalStrLong, inputStr, substr, newStr, substrStart, substrEnd));
-            originalStrLong = inputStr;
-            LOG(TRACE) << "Replaced substring: "<< substr << " with " <<  newStr << " string:" << inputStr;
           },
         [&] {
             LOG(TRACE) << "Started Replace Char: " << inputStr;

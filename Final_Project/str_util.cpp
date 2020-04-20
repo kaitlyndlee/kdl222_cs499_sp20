@@ -3,6 +3,9 @@
 #include <string>
 #include <algorithm>
 
+const char NULL_CHAR = '\0';
+const int MAX_STR_LEN = 200;
+
 //Get the equivalent character in different case
 char lowercase(char c) {
     if(c >= 'A' && c <= 'Z')
@@ -680,4 +683,99 @@ int is_binary(const void *buf) {
     }
 
     return 0;
+}
+
+void copyString(char *destination, char *source) {
+    int index = 0;
+     
+    while( (index < MAX_STR_LEN) && (source[index] != NULL_CHAR) )
+    {
+        destination[index] = source[index];
+        index++;
+        
+        // assign null character to next destination element
+        destination[index] = NULL_CHAR;
+    }
+}
+
+void concatenateString(char *destination, char *source) 
+{
+    // set destination index to end of destination string
+    int destIndex = length_of_buffer(destination);
+
+    int sourceIndex = 0;
+    
+    while( (sourceIndex < MAX_STR_LEN) && (source[sourceIndex] != NULL_CHAR) ) 
+    {
+        destination[destIndex] = source[sourceIndex];
+        sourceIndex++;
+        destIndex++;
+        
+        // assign null character to next destination element
+        destination[destIndex] = NULL_CHAR;
+    }
+}
+
+void getSubString(char *destStr, char *sourceStr, 
+                                          int startIndex, int endIndex) 
+{
+    int sourceStrLen = length_of_buffer(sourceStr);
+    int destIndex = 0;
+    int sourceIndex = startIndex;
+    char *tempSourceStr;
+    
+    if( (startIndex >= 0) && (startIndex <= endIndex) 
+                                                && (endIndex < sourceStrLen) )
+    {
+        tempSourceStr = (char *) malloc(sourceStrLen + 1);
+        copyString(tempSourceStr, sourceStr);
+        
+        while(sourceIndex <= endIndex) 
+        {
+            destStr[destIndex] = tempSourceStr[sourceIndex];
+            
+            destIndex++;
+            sourceIndex++;
+            
+            // assign null character to next destination element
+            destStr[destIndex] = NULL_CHAR;
+        }
+        
+        free(tempSourceStr);
+    }
+    else 
+    {
+        destStr[0] = NULL_CHAR;
+    }
+}
+
+int findSubString(char *testStr, char *searchSubStr) 
+{
+    int testStrLen = length_of_buffer(testStr);
+    int masterIndex = 0;    // location of substring start point
+    int subStrIndex;
+    int internalIndex;
+    
+    while(masterIndex < testStrLen) 
+    {
+        internalIndex = masterIndex;
+        subStrIndex = 0;
+        
+        // while the characters in testStr match those in searchSubStr
+        while( (internalIndex <= testStrLen) &&
+                        (testStr[internalIndex] == searchSubStr[subStrIndex]) )
+        {
+            internalIndex++;
+            subStrIndex++;
+            
+            // if the substring is found
+            if(searchSubStr[subStrIndex] == NULL_CHAR) 
+            {
+                return masterIndex;
+            }
+        }
+        
+        masterIndex++;
+    }
+    return -1;
 }
