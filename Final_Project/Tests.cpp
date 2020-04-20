@@ -54,19 +54,20 @@ TEST(StrUtil, StrManipulation) {
 
     // See if true/false is a substring and assert that it is a bool
     char *substring;
-
-    if(findSubString(inputChar, "true") != -1) {
-        int startIndex = findSubString(inputChar, "true");
+    char *trueChar = "true";
+    char *falseChar = "false";
+    if(findSubString(inputChar, trueChar) != -1) {
+        int startIndex = findSubString(inputChar, trueChar);
         getSubString(substring, inputChar, startIndex, startIndex + 4);
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
     }
 
-    if(findSubString(inputChar, "false") != -1) {
-        int startIndex = findSubString(inputChar, "false");
+    if(findSubString(inputChar, falseChar) != -1) {
+        int startIndex = findSubString(inputChar, falseChar);
         getSubString(substring, inputChar, startIndex, startIndex + 5);
         std::string subStr(substring);
-        ASSERT_False(toBool(subStr, true));
+        ASSERT_FALSE(toBool(subStr, true));
     }
 
     // OneOf
