@@ -54,14 +54,15 @@ TEST(StrUtil, StrManipulation) {
 
     // See if true/false is a substring and assert that it is a bool
     char *substring;
-    char *trueChar = "true";
-    char *falseChar = "false";
-    char *yesChar = "yes";
-    char *noChar = "no";
-    char *onChar = "on";
-    char *offChar = "off";
+    char trueChar[] = "true";
+    char falseChar[] = "false";
+    char yesChar[] = "yes";
+    char noChar[] = "no";
+    char onChar[] = "on";
+    char offChar[] = "off";
 
     if(findSubString(inputChar, trueChar) != -1) {
+        LOG(TRACE) << "Contains true: " << inputChar;
         int startIndex = findSubString(inputChar, trueChar);
         getSubString(substring, inputChar, startIndex, startIndex + 4);
         std::string subStr(substring);
@@ -69,6 +70,7 @@ TEST(StrUtil, StrManipulation) {
     }
 
     if(findSubString(inputChar, falseChar) != -1) {
+        LOG(TRACE) << "Contains false: " << inputChar;
         int startIndex = findSubString(inputChar, falseChar);
         getSubString(substring, inputChar, startIndex, startIndex + 5);
         std::string subStr(substring);
@@ -76,6 +78,7 @@ TEST(StrUtil, StrManipulation) {
     }
 
     if(findSubString(inputChar, yesChar) != -1) {
+        LOG(TRACE) << "Contains yes: " << inputChar;
         int startIndex = findSubString(inputChar, yesChar);
         getSubString(substring, inputChar, startIndex, startIndex + 3);
         std::string subStr(substring);
@@ -83,6 +86,7 @@ TEST(StrUtil, StrManipulation) {
     }
 
     if(findSubString(inputChar, noChar) != -1) {
+        LOG(TRACE) << "Contains no: " << inputChar;
         int startIndex = findSubString(inputChar, noChar);
         getSubString(substring, inputChar, startIndex, startIndex + 2);
         std::string subStr(substring);
@@ -90,6 +94,7 @@ TEST(StrUtil, StrManipulation) {
     }
 
     if(findSubString(inputChar, onChar) != -1) {
+        LOG(TRACE) << "Contains on: " << inputChar;
         int startIndex = findSubString(inputChar, onChar);
         getSubString(substring, inputChar, startIndex, startIndex + 2);
         std::string subStr(substring);
@@ -97,6 +102,7 @@ TEST(StrUtil, StrManipulation) {
     }
 
     if(findSubString(inputChar, offChar) != -1) {
+        LOG(TRACE) << "Contains off: " << inputChar;
         int startIndex = findSubString(inputChar, offChar);
         getSubString(substring, inputChar, startIndex, startIndex + 3);
         std::string subStr(substring);
