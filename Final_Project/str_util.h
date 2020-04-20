@@ -1,5 +1,4 @@
 #pragma once
-#include "color.h"
 #include <string>
 #include <vector>
 #include <string>
@@ -188,36 +187,11 @@ T toNumber(const std::string& str, T def = 0, std::ios_base& (*base)(std::ios_ba
     return output;
 }
 
-//Write number to stream
-template <class T>
-std::string toString(T num, unsigned precision = 0) {
-    std::stringstream out;
-    out.precision(precision);
-    out << std::fixed;
-    out << num;
-    return out.str();
-}
-
-//Write color to string
-template<>
-std::string toString(Color color, unsigned precision);
-
-//Read color from string, two possible formats: "rrggbbaa", "rr gg bb aa"
-//(alpha is optional in both cases)
-Color toColor(const std::string& str);
 
 //Read boolean from string
 bool toBool(const std::string& str, bool def = false);
 
-//Convert an amount of bytes to a neatly displayed size
-std::string toSize(int bytes);
 
-//Convert to a std::string containing a roman numeral representation of numIn;
-//Supports numbers up to 999; Appends the result to the given string
-void romanNumerals(unsigned int numIn, std::string& romanOut);
-
-//Requires that romanOut points to an array of at least 13 char's
-void romanNumerals(unsigned int numIn, char* romanOut);
 
 //Join strings in a vector
 std::string join(std::vector<std::string>& list, const char* delimiter = "\n", bool delim_final = true);
