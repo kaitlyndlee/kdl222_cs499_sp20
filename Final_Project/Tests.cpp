@@ -56,6 +56,11 @@ TEST(StrUtil, StrManipulation) {
     char *substring;
     char *trueChar = "true";
     char *falseChar = "false";
+    char *yesChar = "yes";
+    char *noChar = "no";
+    char *onChar = "on";
+    char *offChar = "off";
+
     if(findSubString(inputChar, trueChar) != -1) {
         int startIndex = findSubString(inputChar, trueChar);
         getSubString(substring, inputChar, startIndex, startIndex + 4);
@@ -66,6 +71,34 @@ TEST(StrUtil, StrManipulation) {
     if(findSubString(inputChar, falseChar) != -1) {
         int startIndex = findSubString(inputChar, falseChar);
         getSubString(substring, inputChar, startIndex, startIndex + 5);
+        std::string subStr(substring);
+        ASSERT_FALSE(toBool(subStr, true));
+    }
+
+    if(findSubString(inputChar, yesChar) != -1) {
+        int startIndex = findSubString(inputChar, yesChar);
+        getSubString(substring, inputChar, startIndex, startIndex + 3);
+        std::string subStr(substring);
+        ASSERT_TRUE(toBool(subStr, false));
+    }
+
+    if(findSubString(inputChar, noChar) != -1) {
+        int startIndex = findSubString(inputChar, noChar);
+        getSubString(substring, inputChar, startIndex, startIndex + 2);
+        std::string subStr(substring);
+        ASSERT_FALSE(toBool(subStr, true));
+    }
+
+    if(findSubString(inputChar, onChar) != -1) {
+        int startIndex = findSubString(inputChar, onChar);
+        getSubString(substring, inputChar, startIndex, startIndex + 2);
+        std::string subStr(substring);
+        ASSERT_TRUE(toBool(subStr, false));
+    }
+
+    if(findSubString(inputChar, offChar) != -1) {
+        int startIndex = findSubString(inputChar, offChar);
+        getSubString(substring, inputChar, startIndex, startIndex + 3);
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
     }
