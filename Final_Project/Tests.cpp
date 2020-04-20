@@ -65,6 +65,7 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Contains true: " << inputChar;
         int startIndex = findSubString(inputChar, trueChar);
         getSubString(substring, inputChar, startIndex, startIndex + 4);
+        LOG(TRACE) << "true substring: " << substring;
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
     }
@@ -73,6 +74,7 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Contains false: " << inputChar;
         int startIndex = findSubString(inputChar, falseChar);
         getSubString(substring, inputChar, startIndex, startIndex + 5);
+        LOG(TRACE) << "false substring: " << substring;
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
     }
@@ -81,6 +83,7 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Contains yes: " << inputChar;
         int startIndex = findSubString(inputChar, yesChar);
         getSubString(substring, inputChar, startIndex, startIndex + 3);
+        LOG(TRACE) << "yes substring: " << substring;
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
     }
@@ -89,6 +92,7 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Contains no: " << inputChar;
         int startIndex = findSubString(inputChar, noChar);
         getSubString(substring, inputChar, startIndex, startIndex + 2);
+        LOG(TRACE) << "no substring: " << substring;
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
     }
@@ -97,6 +101,7 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Contains on: " << inputChar;
         int startIndex = findSubString(inputChar, onChar);
         getSubString(substring, inputChar, startIndex, startIndex + 2);
+        LOG(TRACE) << "on substring: " << substring;
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
     }
@@ -105,6 +110,7 @@ TEST(StrUtil, StrManipulation) {
         LOG(TRACE) << "Contains off: " << inputChar;
         int startIndex = findSubString(inputChar, offChar);
         getSubString(substring, inputChar, startIndex, startIndex + 3);
+        LOG(TRACE) << "off substring: " << substring;
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
     }
