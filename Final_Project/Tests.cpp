@@ -62,57 +62,69 @@ TEST(StrUtil, StrManipulation) {
     char offChar[] = "off";
 
     if(findSubString(inputChar, trueChar) != -1) {
+        substring = (char *) malloc(4);
         LOG(TRACE) << "Contains true: " << inputChar;
         int startIndex = findSubString(inputChar, trueChar);
-        getSubString(substring, inputChar, startIndex, startIndex + 4);
+        getSubString(substring, inputChar, startIndex, startIndex + 3);
         LOG(TRACE) << "true substring: " << substring;
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
+        free(substring);
     }
 
     if(findSubString(inputChar, falseChar) != -1) {
+        substring = (char *) malloc(5);
         LOG(TRACE) << "Contains false: " << inputChar;
         int startIndex = findSubString(inputChar, falseChar);
-        getSubString(substring, inputChar, startIndex, startIndex + 5);
+        getSubString(substring, inputChar, startIndex, startIndex + 4);
         LOG(TRACE) << "false substring: " << substring;
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
+        free(substring);
     }
 
     if(findSubString(inputChar, yesChar) != -1) {
+        substring = (char *) malloc(3);
         LOG(TRACE) << "Contains yes: " << inputChar;
         int startIndex = findSubString(inputChar, yesChar);
-        getSubString(substring, inputChar, startIndex, startIndex + 3);
+        getSubString(substring, inputChar, startIndex, startIndex + 2);
         LOG(TRACE) << "yes substring: " << substring;
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
+        free(substring);
     }
 
     if(findSubString(inputChar, noChar) != -1) {
+        substring = (char *) malloc(2);
         LOG(TRACE) << "Contains no: " << inputChar;
         int startIndex = findSubString(inputChar, noChar);
-        getSubString(substring, inputChar, startIndex, startIndex + 2);
+        getSubString(substring, inputChar, startIndex, startIndex + 1);
         LOG(TRACE) << "no substring: " << substring;
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
+        free(substring);
     }
 
     if(findSubString(inputChar, onChar) != -1) {
+        substring = (char *) malloc(2);
         LOG(TRACE) << "Contains on: " << inputChar;
         int startIndex = findSubString(inputChar, onChar);
-        getSubString(substring, inputChar, startIndex, startIndex + 2);
+        getSubString(substring, inputChar, startIndex, startIndex + 1);
         LOG(TRACE) << "on substring: " << substring;
         std::string subStr(substring);
         ASSERT_TRUE(toBool(subStr, false));
+        free(substring);
     }
 
     if(findSubString(inputChar, offChar) != -1) {
+        substring = (char *) malloc(3);
         LOG(TRACE) << "Contains off: " << inputChar;
         int startIndex = findSubString(inputChar, offChar);
-        getSubString(substring, inputChar, startIndex, startIndex + 3);
+        getSubString(substring, inputChar, startIndex, startIndex + 2);
         LOG(TRACE) << "off substring: " << substring;
         std::string subStr(substring);
         ASSERT_FALSE(toBool(subStr, true));
+        free(substring);
     }
 
     // OneOf
